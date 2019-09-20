@@ -35,7 +35,7 @@ export const fetchNodes = () => async (dispatch) => {
   try {
     const url = routes.nodesUrl();
     const response = await axios.get(url);
-    dispatch(fetchNodesSuccess({ node: response.data }));
+    dispatch(fetchNodesSuccess({ nodes: response.data }));
   } catch (e) {
     dispatch(fetchNodesFailure());
     throw e;

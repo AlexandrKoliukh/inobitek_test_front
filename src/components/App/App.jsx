@@ -2,9 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
+import NodeForm from '../NodeForm/';
+
 class App extends React.Component {
+
   render()  {
-    return <div>App{console.log(this.props)}</div>
+    return (
+      <div className="container">
+        <NodeForm/>
+      </div>
+    );
   }
 }
 

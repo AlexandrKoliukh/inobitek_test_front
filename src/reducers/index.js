@@ -30,9 +30,10 @@ const nodesFetchingState = handleActions({
 
 const nodes = handleActions({
   [actions.fetchNodesSuccess](state, { payload }) {
+    console.log(payload);
     return {
-      byId: _.keyBy(payload.tasks, 'id'),
-      allIds: payload.tasks.map(t => t.id),
+      byId: _.keyBy(payload.nodes.data, 'id'),
+      allIds: payload.nodes.data.map(t => t.id),
     };
   },
   [actions.addNodeSuccess](state, { payload: { task } }) {
