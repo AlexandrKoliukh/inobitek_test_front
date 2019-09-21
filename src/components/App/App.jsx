@@ -5,6 +5,7 @@ import * as actions from '../../actions';
 import NodeForm from '../NodeForm/';
 import Row from '../Row';
 import NodesList from '../NodesList';
+import Loader from '../Loader';
 import './app.css';
 
 
@@ -14,6 +15,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <Row left={<NodesList/>} right={<NodeForm/>}/>
+        <Loader />
       </div>
     );
   }

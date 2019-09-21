@@ -53,7 +53,7 @@ export const fetchNodes = (parentId) => async (dispatch) => {
   try {
     const url = routes.nodesUrl(parentId);
     const response = await axios.get(url);
-    dispatch(fetchNodesSuccess({ nodes: response.data }));
+    dispatch(fetchNodesSuccess({ response }));
   } catch (e) {
     dispatch(fetchNodesFailure());
     throw e;
@@ -65,8 +65,7 @@ export const fetchNode = (id) => async (dispatch) => {
   try {
     const url = routes.nodeUrl(id);
     const response = await axios.get(url);
-    const node = response.data;
-    dispatch(fetchNodeSuccess({ node }));
+    dispatch(fetchNodeSuccess({ response }));
   } catch (e) {
     dispatch(fetchNodeFailure());
     throw e;
@@ -78,7 +77,7 @@ export const updateNode = (node) => async (dispatch) => {
   try {
     const url = routes.nodeUpdateUrl();
     const response = await axios.put(url, node);
-    dispatch(updateNodeSuccess({ nodes: response.data }));
+    dispatch(updateNodeSuccess({ response }));
   } catch (e) {
     dispatch(updateNodeFailure());
     throw e;

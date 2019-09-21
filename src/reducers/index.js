@@ -66,37 +66,48 @@ const nodeUpdateState = handleActions({
 
 const nodes = handleActions({
   [actions.fetchNodesSuccess](state, { payload }) {
+    const { nodes } = payload.response.data;
     return {
-      byId: _.keyBy(payload.nodes.data, 'id'),
-      allIds: payload.nodes.data.map(t => t.id),
+      byId: _.keyBy(nodes, 'id'),
+      allIds: nodes.map(t => t.id),
     };
   },
-  [actions.addNodeSuccess](state, { payload: { node: { data: node } } }) {
+  [actions.addNodeSuccess](state, { payload }) {
+    const { node } = payload.response.data;
     const { byId, allIds } = state;
     return {
       byId: { ...byId, [node.id]: node },
       allIds: [...allIds, node.id],
     };
   },
-  [actions.removeNodeSuccess](state, { payload: { id } }) {
+  [actions.removeNodeSuccess](state, { payload }) {
+    const { id } = payload.response.data;
     const { byId, allIds } = state;
     return {
       byId: _.omit(byId, id),
       allIds: _.without(allIds, id),
     };
   },
+  [actions.updateNodeSuccess](state, { payload }) {
+    const { node } = payload.response.data;
+    const { byId, allIds } = state;
+    return {
+      byId: { ...byId, [node.id]: node },
+      allIds,
+    };
+  },
 }, { byId: {}, allIds: [] });
 
 const node = handleActions({
   [actions.fetchNodeSuccess](state, { payload }) {
-    const { node: { data } } = payload;
+    const { node } = payload.response.data;
     return {
       nodeDetails: {
-        id: data.id,
-        name: data.name,
-        port: data.port,
-        ip: data.ip,
-        parentId: data.parentId,
+        id: node.id,
+        name: node.name,
+        port: node.port,
+        ip: node.ip,
+        parentId: node.parentId,
       }
     }
   }
