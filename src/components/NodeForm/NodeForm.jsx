@@ -6,24 +6,26 @@ import * as actions from '../../actions';
 class NodeForm extends React.Component {
 
   handleSubmit = (form) => {
-    console.log(form);
+    const { nodeDetails, addNode, reset } = this.props;
+    const parentId = nodeDetails ? nodeDetails.id : 0;
+    addNode({ ...form, parentId });
+    reset();
   };
 
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props;
-
     return (
       <form onSubmit={handleSubmit(this.handleSubmit)}>
         <div className="form-group">
           <label>Name</label>
           <div>
-            <Field name="Name" required component="input" type="text" className="form-control"/>
+            <Field name="name" required component="input" type="text" className="form-control"/>
           </div>
         </div>
         <div className="form-group">
           <label>IP</label>
           <div>
-            <Field name="IP" required component="input" type="text" className="form-control"/>
+            <Field name="ip" required component="input" type="text" className="form-control"/>
           </div>
         </div>
         <div className="form-group">
@@ -46,13 +48,21 @@ class NodeForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  const { nodes, node: { nodeDetails } } = state;
   return {
-    nodes: state.nodes,
+    nodes,
+    nodeDetails,
+    initialValues: {
+      name: nodeDetails ? nodeDetails.name :  '',
+      ip: nodeDetails ? nodeDetails.ip : '',
+      port: nodeDetails ? nodeDetails.port : '',
+    }
   }
 };
 
-const ConnectedNodeForm = connect(mapStateToProps, actions)(NodeForm);
-
-export default reduxForm({
+const initFormState = reduxForm({
   form: 'nodeForm'
-})(ConnectedNodeForm);
+})(NodeForm);
+
+export default connect(mapStateToProps, actions)(initFormState);
+

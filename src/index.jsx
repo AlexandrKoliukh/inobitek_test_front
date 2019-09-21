@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 import App from './components/App';
 
-import { fetchNodes } from './actions';
+import * as actions from './actions';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
@@ -20,7 +20,8 @@ const store = createStore(
   ),
 );
 
-store.dispatch(fetchNodes());
+store.dispatch(actions.fetchNodes(0));
+store.dispatch(actions.fetchNode(1));
 
 const root = document.getElementById('root');
 
