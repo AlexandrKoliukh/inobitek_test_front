@@ -5,18 +5,30 @@ import * as actions from '../../actions';
 import NodeForm from '../NodeForm/';
 import Row from '../Row';
 import NodesList from '../NodesList';
-import Loader from '../Loader';
 import './app.css';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import Header from '../Header';
 
 
 class App extends React.Component {
 
-  render()  {
+  render() {
+    // const { nodeDetails } = this.props;
+
     return (
-      <div className="container">
-        <Row left={<NodesList/>} right={<NodeForm/>}/>
-        <Loader />
-      </div>
+      <ErrorBoundary>
+        <div className="container">
+          <Header/>
+          <Row
+            left={<ErrorBoundary><NodesList/></ErrorBoundary>}
+            right={
+              <ErrorBoundary>
+                <NodeForm/>
+              </ErrorBoundary>
+            }
+          />
+        </div>
+      </ErrorBoundary>
     );
   }
 }
@@ -24,6 +36,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks,
+    nodeDetails: state.nodeDetails,
   }
 };
 

@@ -48,7 +48,7 @@ class NodeForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { nodes, node: { nodeDetails } } = state;
+  const { nodes, nodeDetails } = state;
   return {
     nodes,
     nodeDetails,

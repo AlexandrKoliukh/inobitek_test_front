@@ -5,13 +5,16 @@ import icon from './error.png';
 const ErrorIndicator = () => {
   return (
     <div className="error-indicator">
-      <img src={icon} alt="error-icon"/>
+      <img src={icon} alt="error-icon" className="error-icon"/>
       <span className="boom">BOOM!</span>
       <span>
-				something has gone terribly wrong
+				Что-то сломалось
 			</span>
       <span>
-				(but we already sent droids to fix it)
+				Мы обязательно это починим
+			</span>
+      <span>
+				<small>(и сломаем что-нибудь другое)</small>
 			</span>
     </div>
   );

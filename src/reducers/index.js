@@ -98,17 +98,15 @@ const nodes = handleActions({
   },
 }, { byId: {}, allIds: [] });
 
-const node = handleActions({
+const nodeDetails = handleActions({
   [actions.fetchNodeSuccess](state, { payload }) {
     const { node } = payload.response.data;
     return {
-      nodeDetails: {
         id: node.id,
         name: node.name,
         port: node.port,
         ip: node.ip,
         parentId: node.parentId,
-      }
     }
   }
 }, {});
@@ -120,6 +118,6 @@ export default combineReducers({
   nodeAddState,
   nodeUpdateState,
   nodes,
-  node,
+  nodeDetails,
   form: formReducer,
 });

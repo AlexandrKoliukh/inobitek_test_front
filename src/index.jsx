@@ -21,7 +21,7 @@ const store = createStore(
 );
 
 store.dispatch(actions.fetchNodes(0));
-store.dispatch(actions.fetchNode(1));
+// store.dispatch(actions.fetchNode(1));
 
 const root = document.getElementById('root');
 
