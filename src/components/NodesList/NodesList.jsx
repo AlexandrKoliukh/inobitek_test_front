@@ -6,14 +6,16 @@ import Loader from '../Loader';
 
 const actionCreators = {
   fetchNode: actions.fetchNode,
+  addHeaderItem: actions.uiStateAddHeaderItem,
 };
 
 class NodesList extends React.Component {
 
-  handleClick = (id) => (e) => {
+  handleClick = (node) => (e) => {
     e.preventDefault();
-    const { fetchNode } = this.props;
-    fetchNode(id);
+    const { fetchNode, addHeaderItem } = this.props;
+    fetchNode(node.id);
+    addHeaderItem({ item: node });
   };
 
   render() {
@@ -30,7 +32,7 @@ class NodesList extends React.Component {
             <li className={listItemClasses} key={node.id}>
               {node.id === selectedId ?
               <span>{node.name}</span> :
-              <a href="/" onClick={this.handleClick(node.id)}>{node.name}</a>}
+              <a href="/" onClick={this.handleClick(node)}>{node.name}</a>}
             </li>
           );
         })}
