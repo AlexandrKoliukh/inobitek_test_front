@@ -19,7 +19,6 @@ class App extends React.Component {
     // const { nodeDetails } = this.props;
 
     return (
-      <ErrorBoundary>
         <div className="container">
           <Header/>
           <Row
@@ -36,7 +35,6 @@ class App extends React.Component {
             }
           />
         </div>
-      </ErrorBoundary>
     );
   }
 }

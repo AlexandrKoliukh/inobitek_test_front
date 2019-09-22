@@ -4,8 +4,9 @@ import ErrorIndicator from "../ErrorIndicator";
 
 class ErrorBoundary extends React.Component {
   render() {
-    const { errors } = this.props;
-    const hasError = errors.filter(i => i === 'failed').length !== 0;
+    // const { errors } = this.props;
+    const hasError = false;
+    // const hasError2 = errors.filter(i => i === 'failed').length !== 0;
 
     if (hasError) return <ErrorIndicator />;
 

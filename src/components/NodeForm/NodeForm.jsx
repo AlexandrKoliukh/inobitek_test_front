@@ -13,14 +13,31 @@ class NodeForm extends React.Component {
   };
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, headerState } = this.props;
-    return (
+    const { handleSubmit, pristine, reset, submitting, headerState, dbErrors } = this.props;
+
+    const renderDanger = () => (
+      <div className="alert alert-danger" role="alert">
+        Добавление завершилось ошибкой, похоже узел с такими данными уже существует.
+        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    );
+
+    const renderForm = () => (
       <form onSubmit={handleSubmit(this.handleSubmit)}>
         <h3>New node to {headerState[headerState.length - 1].name}</h3>
         <div className="form-group">
           <label>Name</label>
           <div>
-            <Field name="name" required component="input" type="text" className="form-control"/>
+            <Field
+              name="name"
+              required
+              component="input"
+              type="text"
+              className="form-control"
+
+            />
           </div>
         </div>
         <div className="form-group">
@@ -43,18 +60,22 @@ class NodeForm extends React.Component {
             Clear Values
           </button>
         </div>
+        {dbErrors.addError ? renderDanger() : null}
       </form>
-    )
+    );
+
+    return renderForm();
   }
 }
 
 const mapStateToProps = (state) => {
-  const { nodes, nodeDetails, headerState } = state;
+  const { nodes, nodeDetails, headerState, dbErrors } = state;
   return {
     nodes,
     headerState,
+    dbErrors,
     initialValues: {
-      name: nodeDetails ? nodeDetails.name :  '',
+      name: nodeDetails ? nodeDetails.name : '',
       ip: nodeDetails ? nodeDetails.ip : '',
       port: nodeDetails ? nodeDetails.port : '',
     }
