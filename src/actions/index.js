@@ -28,8 +28,7 @@ export const addNode = (node) => async (dispatch) => {
   try {
     const url = routes.nodeAddUrl();
     const response = await axios.post(url, node);
-    const newNode = response.data;
-    dispatch(addNodeSuccess({ node: newNode }));
+    dispatch(addNodeSuccess({ response }));
   } catch (e) {
     dispatch(addNodeFailure());
     throw e;
@@ -83,3 +82,6 @@ export const updateNode = (node) => async (dispatch) => {
     throw e;
   }
 };
+
+export const uiStateAddHeaderItem = createAction('ADD_BREAD_ITEM_IN_HEADER');
+export const uiStateChangeActiveHeaderItem = createAction('REMOVE_BREAD_ITEM_IN_HEADER');
