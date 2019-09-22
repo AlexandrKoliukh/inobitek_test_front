@@ -12,8 +12,9 @@ class Header extends React.Component {
 
   handleClick = (item) => (e) => {
     e.preventDefault();
-    const { changeActiveHeaderItem } = this.props;
+    const { changeActiveHeaderItem, fetchNodes } = this.props;
     changeActiveHeaderItem({ item });
+    fetchNodes(item.id);
   };
 
   render() {

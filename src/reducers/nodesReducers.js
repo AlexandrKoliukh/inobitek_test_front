@@ -4,7 +4,11 @@ import _ from 'lodash';
 
 const nodes = handleActions({
   [actions.fetchNodesSuccess](state, { payload }) {
-    const { nodes } = payload.response.data;
+    const { nodes, dataExists, dbError } = payload.response.data;
+    if (!dataExists && !dbError) return {
+      byId: {},
+      allIds: [],
+    };
     return {
       byId: _.keyBy(nodes, 'id'),
       allIds: nodes.map(t => t.id),

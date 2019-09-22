@@ -18,24 +18,30 @@ class NodesList extends React.Component {
     addHeaderItem({ item: node });
   };
 
+
   render() {
     const { nodes: { byId, allIds }, nodesFetchingState, selectedId } = this.props;
-    const nodesList = (
-      <ul className="list-group">
-        {allIds.map((i) => {
-          const node = byId[i];
-          const listItemClasses = cn({
-            'list-group-item': true,
-            active: node.id === selectedId,
-          });
-          return (
-            <li className={listItemClasses} key={node.id}>
-              {node.id === selectedId ?
+
+    const renderNodeList = () => (
+      allIds.map((i) => {
+        const node = byId[i];
+        const listItemClasses = cn({
+          'list-group-item': true,
+          active: node.id === selectedId,
+        });
+        return (
+          <li className={listItemClasses} key={node.id}>
+            {node.id === selectedId ?
               <span>{node.name}</span> :
               <a href="/" onClick={this.handleClick(node)}>{node.name}</a>}
-            </li>
-          );
-        })}
+          </li>
+        );
+      })
+    );
+
+    const nodesList = (
+      <ul className="list-group">
+        {allIds.length === 0 ? <span>Empty</span> : renderNodeList()}
       </ul>
     );
 
