@@ -23,7 +23,7 @@ const nodes = handleActions({
     };
   },
   [actions.removeNodeSuccess](state, { payload }) {
-    const { id } = payload.response.data;
+    const { id } = payload;
     const { byId, allIds } = state;
     return {
       byId: _.omit(byId, id),
@@ -31,7 +31,6 @@ const nodes = handleActions({
     };
   },
   [actions.updateNodeSuccess](state, { payload }) {
-    console.log(payload);
     const { node } = payload.response.data;
     const { byId, allIds } = state;
     return {

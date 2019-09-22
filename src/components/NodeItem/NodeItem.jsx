@@ -9,7 +9,8 @@ const actionCreators = {
   fetchNodes: actions.fetchNodes,
   nodeDetailsSet: actions.nodeDetailsSet,
   addHeaderItem: actions.uiStateAddHeaderItem,
-  openModal: actions.openModal,
+  openModal: actions.openEditForm,
+  removeNode: actions.removeNode,
 };
 
 class NodeItem extends React.Component {
@@ -27,6 +28,11 @@ class NodeItem extends React.Component {
     openModal();
   };
 
+  handleClickNodeDelete = (node) => () => {
+    const { removeNode } = this.props;
+    removeNode(node);
+  };
+
   render() {
     const { item: node, selectedId } = this.props;
 
@@ -39,6 +45,7 @@ class NodeItem extends React.Component {
         <a href="/" onClick={this.handleClickNodeName(node)}>{node.name}</a>
         <button type="button"
                 className="btn btn-danger btn-sm float-right"
+                onClick={this.handleClickNodeDelete(node)}
         >
           <i className="fa fa-trash-o"/>
         </button>

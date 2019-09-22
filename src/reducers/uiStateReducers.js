@@ -2,8 +2,8 @@ import { handleActions } from 'redux-actions';
 import {
   uiStateAddHeaderItem,
   uiStateChangeActiveHeaderItem,
-  openModal,
-  closeModal,
+  openEditForm,
+  closeEditForm,
 } from '../actions';
 import _ from 'lodash';
 
@@ -24,10 +24,10 @@ const headerState = handleActions({
 }, [{ id: 0, name: 'Root', active: true }]);
 
 const modalState = handleActions({
-  [openModal]() {
+  [openEditForm]() {
     return 'open';
   },
-  [closeModal]() {
+  [closeEditForm]() {
     return 'close';
   },
 }, 'close');

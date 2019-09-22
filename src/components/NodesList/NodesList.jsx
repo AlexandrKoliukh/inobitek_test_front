@@ -9,7 +9,7 @@ const actionCreators = {
   fetchNodes: actions.fetchNodes,
   nodeDetailsSet: actions.nodeDetailsSet,
   addHeaderItem: actions.uiStateAddHeaderItem,
-  openModal: actions.openModal,
+  openModal: actions.openEditForm,
 };
 
 class NodesList extends React.Component {

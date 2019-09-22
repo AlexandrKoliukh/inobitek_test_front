@@ -28,8 +28,8 @@ export const uiStateChangeActiveHeaderItem = createAction('REMOVE_BREAD_ITEM_IN_
 
 export const nodeDetailsSet = createAction('SET_NODE_DETAILS');
 
-export const openModal = createAction('MODAL_OPEN');
-export const closeModal = createAction('MODAL_CLOSE');
+export const openEditForm = createAction('EDIT_FORM_OPEN');
+export const closeEditForm = createAction('EDIT_FORM_CLOSE');
 
 export const addNode = (node) => async (dispatch) => {
   dispatch(addNodeRequest());
@@ -47,7 +47,7 @@ export const removeNode = node => async (dispatch) => {
   dispatch(removeNodeRequest());
   try {
     const url = routes.nodeRemoveUrl();
-    await axios.delete(url, node.id);
+    await axios.delete(url, { data: { id: node.id } });
     dispatch(removeNodeSuccess({ id: node.id }));
   } catch (e) {
     dispatch(removeNodeFailure());
