@@ -7,7 +7,6 @@ import reducers from './reducers';
 import App from './components/App';
 
 import * as actions from './actions';
-import 'bootstrap/dist/css/bootstrap.css';
 
 const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
 const devtoolMiddleware = ext && ext();

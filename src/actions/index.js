@@ -23,6 +23,14 @@ export const updateNodeRequest = createAction('NODES_UPDATE_REQUEST');
 export const updateNodeSuccess = createAction('NODES_UPDATE_SUCCESS');
 export const updateNodeFailure = createAction('NODES_UPDATE_FAILURE');
 
+export const uiStateAddHeaderItem = createAction('ADD_BREAD_ITEM_IN_HEADER');
+export const uiStateChangeActiveHeaderItem = createAction('REMOVE_BREAD_ITEM_IN_HEADER');
+
+export const nodeDetailsSet = createAction('SET_NODE_DETAILS');
+
+export const openModal = createAction('MODAL_OPEN');
+export const closeModal = createAction('MODAL_CLOSE');
+
 export const addNode = (node) => async (dispatch) => {
   dispatch(addNodeRequest());
   try {
@@ -82,6 +90,3 @@ export const updateNode = (node) => async (dispatch) => {
     throw e;
   }
 };
-
-export const uiStateAddHeaderItem = createAction('ADD_BREAD_ITEM_IN_HEADER');
-export const uiStateChangeActiveHeaderItem = createAction('REMOVE_BREAD_ITEM_IN_HEADER');

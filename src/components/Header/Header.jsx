@@ -25,7 +25,6 @@ class Header extends React.Component {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
             {headerState.map((item) => {
-              console.log(item);
               const itemClasses = cn({
                 'breadcrumb-item': true,
                 active: item.active,

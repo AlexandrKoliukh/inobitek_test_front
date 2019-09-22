@@ -31,6 +31,7 @@ const nodes = handleActions({
     };
   },
   [actions.updateNodeSuccess](state, { payload }) {
+    console.log(payload);
     const { node } = payload.response.data;
     const { byId, allIds } = state;
     return {

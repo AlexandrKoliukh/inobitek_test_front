@@ -6,18 +6,26 @@ import Loader from '../Loader';
 
 const actionCreators = {
   fetchNode: actions.fetchNode,
+  fetchNodes: actions.fetchNodes,
+  nodeDetailsSet: actions.nodeDetailsSet,
   addHeaderItem: actions.uiStateAddHeaderItem,
+  openModal: actions.openModal,
 };
 
 class NodesList extends React.Component {
 
-  handleClick = (node) => (e) => {
+  handleClickNodeName = (node) => (e) => {
     e.preventDefault();
-    const { fetchNode, addHeaderItem } = this.props;
-    fetchNode(node.id);
+    const { fetchNodes, addHeaderItem } = this.props;
+    fetchNodes(node.id);
     addHeaderItem({ item: node });
   };
 
+  handleClickNodeInfo = (id) => () => {
+    const { nodes, nodeDetailsSet, openModal } = this.props;
+    nodeDetailsSet({ node: nodes.byId[id] });
+    openModal();
+  };
 
   render() {
     const { nodes: { byId, allIds }, nodesFetchingState, selectedId } = this.props;
@@ -33,7 +41,18 @@ class NodesList extends React.Component {
           <li className={listItemClasses} key={node.id}>
             {node.id === selectedId ?
               <span>{node.name}</span> :
-              <a href="/" onClick={this.handleClick(node)}>{node.name}</a>}
+              <a href="/" onClick={this.handleClickNodeName(node)}>{node.name}</a>}
+            <button type="button"
+                    className="btn btn-danger btn-sm float-right"
+            >
+              <i className="fa fa-trash-o"/>
+            </button>
+            <button type="button"
+                    className="btn btn-success btn-sm float-right"
+                    onClick={this.handleClickNodeInfo(node.id)}
+            >
+              <i className="fa fa-info"/>
+            </button>
           </li>
         );
       })

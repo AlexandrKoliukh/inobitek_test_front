@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
-import Loader from '../Loader';
+// import Loader from '../Loader';
 
 const actionCreators = {
   updateNode: actions.updateNode,
@@ -12,15 +12,16 @@ const actionCreators = {
 class NodeDetailsForm extends React.Component {
 
   handleSubmit = (form) => {
-    // const { updateNode } = this.props;
-    console.log(form);
+    const { updateNode, nodeDetails } = this.props;
+    updateNode({ ...form, id: nodeDetails.id });
   };
 
   render() {
-    const { handleSubmit, reset, submitting, nodeFetchingState } = this.props;
+    const { handleSubmit, reset, submitting, modalState, nodeDetails } = this.props;
 
     const renderForm = () => (
       <form onSubmit={handleSubmit(this.handleSubmit)}>
+        <h3>Edit: {nodeDetails.name}</h3>
         <div className="form-group">
           <label>Name</label>
           <div>
@@ -55,26 +56,24 @@ class NodeDetailsForm extends React.Component {
       </form>
     );
 
-    const renderFormState = nodeFetchingState !== 'finished' ? <Loader/> : renderForm();
-    return nodeFetchingState !== 'none' ? renderFormState : null;
+    // const renderFormState = nodeFetchingState !== 'finished' ? <Loader/> : renderForm();
+    return modalState !== 'close' ? renderForm() : null;
   }
 }
 
 const mapStateToProps = (state) => {
   const { nodeDetails } = state;
+  const { name, ip, port } = nodeDetails;
   return {
     nodeDetails,
-    nodeFetchingState: state.nodeFetchingState,
-    values: {
-      name: nodeDetails ? nodeDetails.name : '',
-      ip: nodeDetails ? nodeDetails.ip : '',
-      port: nodeDetails ? nodeDetails.port : '',
-    }
+    modalState: state.modalState,
+    initialValues: { name, ip, port },
   }
 };
 
 const initFormState = reduxForm({
-  form: 'nodeDetailsForm'
+  form: 'nodeDetailsForm',
+  enableReinitialize: true,
 })(NodeDetailsForm);
 
 export default connect(mapStateToProps, actionCreators)(initFormState);

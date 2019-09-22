@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
 import NodeForm from '../NodeForm/';
+import NodeDetailsForm from '../NodeDetailsForm/NodeDetailsForm';
 import Row from '../Row';
 import NodesList from '../NodesList';
-import './app.css';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import Header from '../Header';
 
+import './app.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 class App extends React.Component {
 
@@ -20,10 +23,15 @@ class App extends React.Component {
         <div className="container">
           <Header/>
           <Row
-            left={<ErrorBoundary><NodesList/></ErrorBoundary>}
+            left={
+              <ErrorBoundary>
+                <NodesList/>
+              </ErrorBoundary>
+            }
             right={
               <ErrorBoundary>
                 <NodeForm/>
+                <NodeDetailsForm/>
               </ErrorBoundary>
             }
           />
