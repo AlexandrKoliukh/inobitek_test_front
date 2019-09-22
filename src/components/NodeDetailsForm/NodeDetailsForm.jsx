@@ -2,18 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
+// import { closeModal } from '../../actions';
 // import Loader from '../Loader';
 
 const actionCreators = {
   updateNode: actions.updateNode,
   fetchNode: actions.fetchNode,
+  closeModal: actions.closeModal,
 };
 
 class NodeDetailsForm extends React.Component {
 
   handleSubmit = (form) => {
-    const { updateNode, nodeDetails } = this.props;
-    updateNode({ ...form, id: nodeDetails.id });
+    const { updateNode, nodeDetails, closeModal } = this.props;
+    console.log(nodeDetails);
+    updateNode({ ...form, id: nodeDetails.id, parentId: nodeDetails.parentId });
+    closeModal();
   };
 
   render() {

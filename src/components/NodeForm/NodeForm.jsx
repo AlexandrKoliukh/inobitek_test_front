@@ -6,16 +6,17 @@ import * as actions from '../../actions';
 class NodeForm extends React.Component {
 
   handleSubmit = (form) => {
-    const { nodeDetails, addNode, reset } = this.props;
-    const parentId = nodeDetails ? nodeDetails.id : 0;
+    const { addNode, reset, headerState } = this.props;
+    const parentId = headerState[headerState.length - 1].id || 0;
     addNode({ ...form, parentId });
     reset();
   };
 
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit, pristine, reset, submitting, headerState } = this.props;
     return (
       <form onSubmit={handleSubmit(this.handleSubmit)}>
+        <h3>New node to {headerState[headerState.length - 1].name}</h3>
         <div className="form-group">
           <label>Name</label>
           <div>
@@ -48,10 +49,10 @@ class NodeForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { nodes, nodeDetails } = state;
+  const { nodes, nodeDetails, headerState } = state;
   return {
     nodes,
-    nodeDetails,
+    headerState,
     initialValues: {
       name: nodeDetails ? nodeDetails.name :  '',
       ip: nodeDetails ? nodeDetails.ip : '',
