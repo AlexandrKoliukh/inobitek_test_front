@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-import { ip } from './validation';
+import { ip, port, name } from '../../validators/validation';
 
 class NewNodeForm extends React.Component {
 
@@ -15,7 +15,7 @@ class NewNodeForm extends React.Component {
   };
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, headerState, dbErrors } = this.props;
+    const { handleSubmit, pristine, reset, errors: error, submitting, headerState, dbErrors } = this.props;
 
     const renderDanger = (
       <div className="alert alert-danger" role="alert">
@@ -33,7 +33,9 @@ class NewNodeForm extends React.Component {
               name="name"
               component="input"
               required
+              maxLength="15"
               className="form-control"
+              normalize={name}
             />
           </div>
         </div>
@@ -43,6 +45,7 @@ class NewNodeForm extends React.Component {
             <Field name="ip"
                    component="input"
                    required
+                   maxLength="15"
                    className="form-control"
                    normalize={ip}
             />
@@ -54,11 +57,13 @@ class NewNodeForm extends React.Component {
             <Field name="port"
                    component="input"
                    required
+                   maxLength="10"
                    className="form-control"
-
+                   normalize={port}
             />
           </div>
         </div>
+        {error && <div>{error}</div>}
         <div className="form-group">
           <button type="submit" disabled={pristine || submitting} className="btn btn-primary">Submit</button>
           <button type="button" disabled={pristine || submitting}
@@ -89,7 +94,7 @@ const mapStateToProps = (state) => {
 
 const initFormState = reduxForm({
   form: 'nodeForm',
-  // validate,
+  // validation,
 })(NewNodeForm);
 
 export default connect(mapStateToProps, actions)(initFormState);

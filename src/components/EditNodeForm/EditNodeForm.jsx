@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
+import { ip, name, port } from '../../validators/validation';
+
 const actionCreators = {
   updateNode: actions.updateNode,
   fetchNode: actions.fetchNode,
@@ -31,6 +33,7 @@ class EditNodeForm extends React.Component {
                    component="input"
                    type="text"
                    className="form-control"
+                   normalize={name}
             />
           </div>
         </div>
@@ -42,13 +45,20 @@ class EditNodeForm extends React.Component {
                    component="input"
                    type="text"
                    className="form-control"
+                   normalize={ip}
             />
           </div>
         </div>
         <div className="form-group">
           <label>Port</label>
           <div>
-            <Field name="port" required component="input" type="text" className="form-control"/>
+            <Field name="port"
+                   required
+                   component="input"
+                   type="text"
+                   className="form-control"
+                   normalize={port}
+            />
           </div>
         </div>
         <div className="form-group">
