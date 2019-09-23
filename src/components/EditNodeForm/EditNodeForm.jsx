@@ -20,7 +20,7 @@ class EditNodeForm extends React.Component {
   };
 
   render() {
-    const { handleSubmit, reset, submitting, editFormState, nodeDetails } = this.props;
+    const { handleSubmit, submitting, editFormState, nodeDetails } = this.props;
 
     const renderForm = () => (
       <form onSubmit={handleSubmit(this.handleSubmit)}>
@@ -64,9 +64,6 @@ class EditNodeForm extends React.Component {
         <div className="form-group">
           <button type="submit" className="btn btn-primary" disabled={submitting}>
             Submit
-          </button>
-          <button type="button" className="btn btn-secondary" disabled={submitting} onClick={reset}>
-            Clear Values
           </button>
         </div>
       </form>
