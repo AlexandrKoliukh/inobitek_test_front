@@ -80,6 +80,7 @@ const mapStateToProps = (state) => {
   const { nodeDetails } = state;
   const { name, ip, port } = nodeDetails;
   return {
+    nodeUpdateState: state.nodeUpdateState,
     nodeDetails,
     editFormState: state.editFormState,
     initialValues: { name, ip, port },

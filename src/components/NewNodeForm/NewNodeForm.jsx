@@ -15,7 +15,7 @@ class NewNodeForm extends React.Component {
   };
 
   render() {
-    const { handleSubmit, pristine, reset, errors: error, submitting, headerState, dbErrors } = this.props;
+    const { handleSubmit, pristine, reset, submitting, headerState, dbErrors } = this.props;
 
     const renderDanger = (
       <div className="alert alert-danger" role="alert">
@@ -63,7 +63,6 @@ class NewNodeForm extends React.Component {
             />
           </div>
         </div>
-        {error && <div>{error}</div>}
         <div className="form-group">
           <button type="submit" disabled={pristine || submitting} className="btn btn-primary">Submit</button>
           <button type="button" disabled={pristine || submitting}
