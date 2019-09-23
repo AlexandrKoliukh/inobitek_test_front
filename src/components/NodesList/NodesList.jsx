@@ -1,34 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
 import Loader from '../Loader';
 import NodeItem from '../NodeItem';
 
-const actionCreators = {
-  fetchNode: actions.fetchNode,
-  fetchNodes: actions.fetchNodes,
-  nodeDetailsSet: actions.nodeDetailsSet,
-  addHeaderItem: actions.uiStateAddHeaderItem,
-  openModal: actions.openEditForm,
+const NodesList = (props) => {
+  const { nodes: { byId, allIds }, nodesFetchingState } = props;
+
+  const renderNodeList = () =>
+    allIds.map((i) => <NodeItem item={byId[i]} key={i}/>);
+
+  const nodesList = (
+    <ul className="list-group">
+      {allIds.length === 0 ? <span>Empty</span> : renderNodeList()}
+    </ul>
+  );
+
+  return nodesFetchingState !== 'finished' ? <Loader/> : nodesList;
 };
-
-class NodesList extends React.Component {
-
-  render() {
-    const { nodes: { byId, allIds }, nodesFetchingState } = this.props;
-
-    const renderNodeList = () =>
-      allIds.map((i) => <NodeItem item={byId[i]} key={i}/>);
-
-    const nodesList = (
-      <ul className="list-group">
-        {allIds.length === 0 ? <span>Empty</span> : renderNodeList()}
-      </ul>
-    );
-
-    return nodesFetchingState !== 'finished' ? <Loader/> : nodesList;
-  }
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -37,4 +25,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, actionCreators)(NodesList);
+export default connect(mapStateToProps)(NodesList);

@@ -1,10 +1,5 @@
 import { handleActions } from 'redux-actions';
-import {
-  uiStateAddHeaderItem,
-  uiStateChangeActiveHeaderItem,
-  openEditForm,
-  closeEditForm,
-} from '../actions';
+import { closeEditForm, openEditForm, uiStateAddHeaderItem, uiStateChangeActiveHeaderItem, } from '../actions';
 import _ from 'lodash';
 
 const headerState = handleActions({

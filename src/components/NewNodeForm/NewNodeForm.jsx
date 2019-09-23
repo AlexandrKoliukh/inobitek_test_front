@@ -33,7 +33,7 @@ class NewNodeForm extends React.Component {
               name="name"
               component="input"
               required
-              maxLength="15"
+              maxLength="30"
               className="form-control"
               normalize={name}
             />

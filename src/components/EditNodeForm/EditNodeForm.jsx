@@ -32,6 +32,7 @@ class EditNodeForm extends React.Component {
                    required
                    component="input"
                    type="text"
+                   maxLength="30"
                    className="form-control"
                    normalize={name}
             />
@@ -44,6 +45,7 @@ class EditNodeForm extends React.Component {
                    required
                    component="input"
                    type="text"
+                   maxLength="15"
                    className="form-control"
                    normalize={ip}
             />
@@ -56,6 +58,7 @@ class EditNodeForm extends React.Component {
                    required
                    component="input"
                    type="text"
+                   maxLength="10"
                    className="form-control"
                    normalize={port}
             />

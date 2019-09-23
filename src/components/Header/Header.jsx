@@ -29,7 +29,6 @@ class Header extends React.Component {
                 'breadcrumb-item': true,
                 active: item.active,
               });
-
               return (
                 <li
                   className={itemClasses}
@@ -45,7 +44,8 @@ class Header extends React.Component {
             })}
           </ol>
         </nav>
-      </div>);
+      </div>
+    );
   }
 }
 

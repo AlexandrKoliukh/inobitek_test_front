@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 import App from './components/App';
 
-import * as actions from './actions';
+import { fetchNodes } from './actions';
 
 const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
 const devtoolMiddleware = ext && ext();
@@ -19,8 +19,7 @@ const store = createStore(
   ),
 );
 
-store.dispatch(actions.fetchNodes(0));
-// store.dispatch(actions.fetchNode(1));
+store.dispatch(fetchNodes(0));
 
 const root = document.getElementById('root');
 
