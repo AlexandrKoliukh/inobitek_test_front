@@ -4,10 +4,8 @@ import ErrorIndicator from "../ErrorIndicator";
 
 class ErrorBoundary extends React.Component {
   render() {
-    // const { errors } = this.props;
-    const hasError = false;
-    // const hasError2 = errors.filter(i => i === 'failed').length !== 0;
-
+    const { errors } = this.props;
+    const hasError = errors.filter(i => i[0] === 'failed' && !i[1]).length !== 0;
     if (hasError) return <ErrorIndicator />;
 
     return this.props.children;
@@ -15,13 +13,16 @@ class ErrorBoundary extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  const { dbErrors: {
+    addError,
+    updateError,
+    fetchError,
+  } } = state;
   return {
     errors: [
-      state.nodeRemovingState,
-      state.nodeFetchingState,
-      state.nodesFetchingState,
-      state.nodeAddState,
-      state.nodeUpdateState,
+      [state.nodesFetchingState, fetchError],
+      [state.nodeAddState, addError],
+      [state.nodeUpdateState, updateError],
     ]
   }
 };

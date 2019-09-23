@@ -13,5 +13,17 @@ export const dbErrors = handleActions({
       ...state,
       addError: false,
     }
+  },
+  [actions.updateNodeFailure](state) {
+    return {
+      ...state,
+      updateError: true,
+    }
+  },
+  [actions.updateNodeSuccess](state) {
+    return {
+      ...state,
+      updateError: false,
+    }
   }
 }, { updateError: false, addError: false, fetchError: false });

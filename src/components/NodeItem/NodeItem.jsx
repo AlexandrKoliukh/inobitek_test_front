@@ -9,28 +9,31 @@ const actionCreators = {
   fetchNodes: actions.fetchNodes,
   nodeDetailsSet: actions.nodeDetailsSet,
   addHeaderItem: actions.uiStateAddHeaderItem,
-  openModal: actions.openEditForm,
+  openEditForm: actions.openEditForm,
   removeNode: actions.removeNode,
+  closeEditForm: actions.closeEditForm
 };
 
 class NodeItem extends React.Component {
 
   handleClickNodeName = (node) => (e) => {
     e.preventDefault();
-    const { fetchNodes, addHeaderItem } = this.props;
+    const { fetchNodes, addHeaderItem, closeEditForm } = this.props;
     fetchNodes(node.id);
     addHeaderItem({ item: node });
+    closeEditForm();
   };
 
   handleClickNodeInfo = (node) => () => {
-    const { nodeDetailsSet, openModal } = this.props;
+    const { nodeDetailsSet, openEditForm } = this.props;
     nodeDetailsSet({ node });
-    openModal();
+    openEditForm();
   };
 
   handleClickNodeDelete = (node) => () => {
-    const { removeNode } = this.props;
+    const { removeNode, closeEditForm } = this.props;
     removeNode(node);
+    closeEditForm();
   };
 
   render() {

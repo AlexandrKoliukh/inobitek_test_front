@@ -6,19 +6,19 @@ import * as actions from '../../actions';
 const actionCreators = {
   updateNode: actions.updateNode,
   fetchNode: actions.fetchNode,
-  closeModal: actions.closeEditForm,
+  closeEditForm: actions.closeEditForm,
 };
 
-class NodeDetailsForm extends React.Component {
+class EditNodeForm extends React.Component {
 
   handleSubmit = (form) => {
-    const { updateNode, nodeDetails, closeModal } = this.props;
+    const { updateNode, nodeDetails, closeEditForm } = this.props;
     updateNode({ ...form, id: nodeDetails.id, parentId: nodeDetails.parentId });
-    closeModal();
+    closeEditForm();
   };
 
   render() {
-    const { handleSubmit, reset, submitting, modalState, nodeDetails } = this.props;
+    const { handleSubmit, reset, submitting, editFormState, nodeDetails } = this.props;
 
     const renderForm = () => (
       <form onSubmit={handleSubmit(this.handleSubmit)}>
@@ -37,7 +37,12 @@ class NodeDetailsForm extends React.Component {
         <div className="form-group">
           <label>IP</label>
           <div>
-            <Field name="ip" required component="input" type="text" className="form-control"/>
+            <Field name="ip"
+                   required
+                   component="input"
+                   type="text"
+                   className="form-control"
+            />
           </div>
         </div>
         <div className="form-group">
@@ -57,8 +62,7 @@ class NodeDetailsForm extends React.Component {
       </form>
     );
 
-    // const renderFormState = nodeFetchingState !== 'finished' ? <Loader/> : renderForm();
-    return modalState !== 'close' ? renderForm() : null;
+    return editFormState !== 'close' ? renderForm() : null;
   }
 }
 
@@ -67,7 +71,7 @@ const mapStateToProps = (state) => {
   const { name, ip, port } = nodeDetails;
   return {
     nodeDetails,
-    modalState: state.modalState,
+    editFormState: state.editFormState,
     initialValues: { name, ip, port },
   }
 };
@@ -75,6 +79,6 @@ const mapStateToProps = (state) => {
 const initFormState = reduxForm({
   form: 'nodeDetailsForm',
   enableReinitialize: true,
-})(NodeDetailsForm);
+})(EditNodeForm);
 
 export default connect(mapStateToProps, actionCreators)(initFormState);

@@ -23,7 +23,7 @@ const headerState = handleActions({
   },
 }, [{ id: 0, name: 'Root', active: true }]);
 
-const modalState = handleActions({
+const editFormState = handleActions({
   [openEditForm]() {
     return 'open';
   },
@@ -34,5 +34,5 @@ const modalState = handleActions({
 
 export {
   headerState,
-  modalState,
+  editFormState,
 }

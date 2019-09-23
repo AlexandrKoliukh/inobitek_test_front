@@ -1,9 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../../actions';
 
-import NodeForm from '../NodeForm/';
-import NodeDetailsForm from '../NodeDetailsForm/NodeDetailsForm';
+import NodeForm from '../NewNodeForm/';
+import NodeDetailsForm from '../EditNodeForm/EditNodeForm';
 import Row from '../Row';
 import NodesList from '../NodesList';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
@@ -13,37 +11,25 @@ import './app.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 
-class App extends React.Component {
-
-  render() {
-    // const { nodeDetails } = this.props;
-
-    return (
-        <div className="container">
-          <Header/>
-          <Row
-            left={
-              <ErrorBoundary>
-                <NodesList/>
-              </ErrorBoundary>
-            }
-            right={
-              <ErrorBoundary>
-                <NodeForm/>
-                <NodeDetailsForm/>
-              </ErrorBoundary>
-            }
-          />
-        </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    tasks: state.tasks,
-    nodeDetails: state.nodeDetails,
-  }
+const App = () => {
+  return (
+    <ErrorBoundary>
+      <div className="container">
+        <Header/>
+        <Row
+          left={
+            <NodesList/>
+          }
+          right={
+            <>
+              <NodeForm/>
+              <NodeDetailsForm/>
+            </>
+          }
+        />
+      </div>
+    </ErrorBoundary>
+  );
 };
 
-export default connect(mapStateToProps, actions)(App);
+export default App;
